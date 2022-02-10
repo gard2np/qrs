@@ -1,16 +1,350 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta
-			http-equiv="Refresh"
-			content="0.3;url=https://m.gasapp.co.kr/app/launcherGasApp.html"
-		/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>가스앱 다운로드</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" href="./static/index.css" />
+		<title>다운로드 런쳐(가스앱)</title>
+
+		<script>
+			var timeout;
+
+			var Launcher = (function () {
+				function Launcher(id, company) {
+					this.link_app = company
+						? "pathgasapp://" + company + "/home"
+						: "pathgasapp://0/home";
+					switch (id) {
+						case "giro":
+							this.ct = "giro";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "giro";
+							this.utm_campaign = "201808";
+							break;
+						case "mms":
+							this.ct = "mms";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "mms";
+							this.utm_campaign = "201709";
+							break;
+						case "lms":
+							this.ct = "lms";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201709";
+							break;
+						case "pop":
+							this.ct = "pop";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "pop";
+							this.utm_campaign = "201709";
+							break;
+						case "poster":
+							this.ct = "poster";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "poster";
+							this.utm_campaign = "201709";
+							break;
+						case "xbanner":
+							this.ct = "xbanner";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "x-banner";
+							this.utm_campaign = "201709";
+							break;
+						case "email":
+							this.ct = "email";
+							this.utm_source = "edm";
+							this.utm_medium = "banner";
+							this.utm_campaign = "201709";
+							break;
+						case "reward":
+							this.ct = "reward";
+							this.utm_source = "adpopcorn";
+							this.utm_medium = "cpa";
+							this.utm_campaign = "20170821";
+							break;
+						case "reward-ohc":
+							this.ct = "reward-ohc";
+							this.utm_source = "ohc";
+							this.utm_medium = "cpa";
+							this.utm_campaign = "201711";
+							break;
+						case "homepage":
+							this.ct = "homepage";
+							this.utm_source = "homepage";
+							this.utm_medium = "banner";
+							this.utm_campaign = "201709";
+							break;
+						case "leaflet":
+							this.ct = "leaflet";
+							this.utm_source = "manager";
+							this.utm_medium = "leaflet";
+							this.utm_campaign = "201709";
+							break;
+						case "meter-reading-notice":
+							this.ct = "meter-reading-notice";
+							this.utm_source = "apt";
+							this.utm_medium = "meter-reading-notice";
+							this.utm_campaign = "201709";
+							break;
+						case "movein-lms":
+							this.ct = "movein-lms";
+							this.utm_source = "moveinnotice";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201801";
+							break;
+						case "leavinglms":
+							this.ct = "leavinglms";
+							this.utm_source = "leaving";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201903";
+							break;
+						case "lms-meter":
+							this.ct = "lms-meter";
+							this.utm_source = "csteam";
+							this.utm_medium = "lms";
+							this.utm_campaign = "202003";
+							break;
+						case "event":
+							this.ct = "event";
+							this.utm_source = "momcafe";
+							this.utm_medium = "banner";
+							this.utm_campaign = "202008";
+							break;
+						case "giro2":
+							this.ct = "giro2";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "giro";
+							this.utm_campaign = "201808";
+							break;
+						case "mms2":
+							this.ct = "mms2";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "mms";
+							this.utm_campaign = "201709";
+							break;
+						case "lms2":
+							this.ct = "lms2";
+							this.utm_source = "billingnotice";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201709";
+							break;
+						case "pop2":
+							this.ct = "pop2";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "pop";
+							this.utm_campaign = "201709";
+							break;
+						case "poster2":
+							this.ct = "poster2";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "poster";
+							this.utm_campaign = "201709";
+							break;
+						case "xbanner2":
+							this.ct = "xbanner2";
+							this.utm_source = "servicecenter";
+							this.utm_medium = "x-banner";
+							this.utm_campaign = "201709";
+							break;
+						case "email2":
+							this.ct = "email2";
+							this.utm_source = "edm";
+							this.utm_medium = "banner";
+							this.utm_campaign = "201709";
+							break;
+						case "reward2":
+							this.ct = "reward2";
+							this.utm_source = "adpopcorn";
+							this.utm_medium = "cpa";
+							this.utm_campaign = "20170821";
+							break;
+						case "reward-ohc2":
+							this.ct = "reward-ohc2";
+							this.utm_source = "ohc";
+							this.utm_medium = "cpa";
+							this.utm_campaign = "201711";
+							break;
+						case "homepage2":
+							this.ct = "homepage2";
+							this.utm_source = "homepage";
+							this.utm_medium = "banner";
+							this.utm_campaign = "201709";
+							break;
+						case "leaflet2":
+							this.ct = "leaflet2";
+							this.utm_source = "manager";
+							this.utm_medium = "leaflet";
+							this.utm_campaign = "201709";
+							break;
+						case "meter-reading-notice2":
+							this.ct = "meter-reading-notice2";
+							this.utm_source = "apt";
+							this.utm_medium = "meter-reading-notice";
+							this.utm_campaign = "201709";
+							break;
+						case "movein-lms2":
+							this.ct = "movein-lms2";
+							this.utm_source = "moveinnotice";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201801";
+							break;
+						case "leavinglms2":
+							this.ct = "leavinglms2";
+							this.utm_source = "leaving";
+							this.utm_medium = "lms";
+							this.utm_campaign = "201903";
+							break;
+						case "lms-meter2":
+							this.ct = "lms-meter2";
+							this.utm_source = "csteam";
+							this.utm_medium = "lms";
+							this.utm_campaign = "202003";
+							break;
+						case "event2":
+							this.ct = "event2";
+							this.utm_source = "scbank";
+							this.utm_medium = "scbankapp";
+							this.utm_campaign = "202008";
+							break;
+						case "mission":
+							this.ct = "mission";
+							this.utm_source = "scg";
+							this.utm_medium = "kakaotalk";
+							this.utm_campaign = "202010";
+							break;
+						case "registration":
+							this.link_app = company
+								? "pathgasapp://" + company + "/useContractApprovalCheck"
+								: "pathgasapp://3/useContractApprovalCheck";
+							this.ct = "registration";
+							this.utm_source = "jeju";
+							this.utm_medium = "jejuapp";
+							this.utm_campaign = "202104";
+							break;
+						case "indications":
+							this.link_app = "pathgasapp://2/indications";
+							this.ct = "indications";
+							this.utm_source = "incheon";
+							this.utm_medium = "incheonapp";
+							this.utm_campaign = "202110";
+							break;
+						default:
+							this.ct = "";
+							this.utm_source = "";
+							this.utm_medium = "";
+							this.utm_campaign = "";
+							break;
+					}
+					this.link_ios =
+						"https://itunes.apple.com/app/apple-store/id741949011?pt=118288799&mt=8&ct=" +
+						this.ct;
+					this.link_android =
+						"https://play.google.com/store/apps/details?id=com.biller.scg&referrer=" +
+						encodeURIComponent(
+							"utm_source=" +
+								this.utm_source +
+								"&utm_medium=" +
+								this.utm_medium +
+								"&utm_campaign=" +
+								this.utm_campaign
+						);
+					this.link_android_market =
+						"market://details?id=com.biller.scg&referrer=" +
+						encodeURIComponent(
+							"utm_source=" +
+								this.utm_source +
+								"&utm_medium=" +
+								this.utm_medium +
+								"&utm_campaign=" +
+								this.utm_campaign
+						) +
+						(id === "upgrade" ? "" : "&launch=true&url=" + this.link_app);
+				}
+				return Launcher;
+			})();
+
+			// 쿼리스트링 파싱
+			function queryString(url) {
+				var qs = url.substring(url.indexOf("?") + 1).split("&");
+				for (var i = 0, result = {}; i < qs.length; i++) {
+					qs[i] = qs[i].split("=");
+					result[qs[i][0]] = decodeURIComponent(qs[i][1]);
+				}
+				return result;
+			}
+
+			function launchApp(isClick) {
+				var parser = queryString(document.location.href);
+				var id = parser.id;
+				var company = parser.company;
+				var launcher = new Launcher(id, company);
+				var button = document.querySelector(".registration");
+
+				if (navigator.userAgent.match(/Android/i)) {
+					if (isClick === 1) {
+						document.location = launcher.link_android;
+					} else {
+						document.location = launcher.link_android_market;
+						// 인천 자가검침 바로가기 링크
+						if (id !== "indications") {
+							timeout = setTimeout(function () {
+								document.location = launcher.link_android;
+							}, 500);
+						}
+					}
+				} else if (navigator.userAgent.match(/(iPhone|iPad)/i)) {
+					if (id === "registration") {
+						button.style.display = "block";
+					}
+					if (isClick === 1) {
+						document.location = launcher.link_ios;
+					} else {
+						// 인천 자가검침 바로가기 링크
+						if (id === "indications") {
+							document.location = launcher.link_app;
+						}
+					}
+				} else if (navigator.userAgent.match(/Macintosh/i)) {
+					document.location = launcher.link_ios;
+				} else {
+					document.location = launcher.link_android;
+				}
+				window.addEventListener("load", preventPopup);
+			}
+
+			function preventPopup() {
+				clearTimeout(timeout);
+				timeout = null;
+				window.removeEventListener("pagehide", preventPopup);
+			}
+		</script>
 	</head>
-	<body>
+
+	<body onload="launchApp()">
+		<div class="wrap">
+			<div class="s_box">
+				<p class="txt_b pt2rem">100만 명이 선택한</p>
+				<p class="wid8rem">
+					<img src="./static/txt_gas_app.png" alt="" />
+				</p>
+				<p class="b_txt_l mt14rem">
+					편하게 <span class="bold">요금조회, 납부, 방문예약</span> 등<br />
+					다양한 서비스를 이용해 보세요.
+				</p>
+				<p class="full_img mt2rem">
+					<img src="./static/img_gas_app_1.png" alt="" />
+				</p>
+				<div class="s_box mb2rem">
+					<button
+						class="round_btn bg_blue mt2rem mb1rem"
+						onclick="launchApp(1)"
+					>
+						가스앱 설치하기
+					</button>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 		<script type="text/javascript">
 			if (!wcs_add) var wcs_add = {};
