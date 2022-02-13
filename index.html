@@ -286,12 +286,13 @@
 						document.location = launcher.link_android;
 					} else {
 						document.location = launcher.link_android_market;
+
 					}
-				} else if (navigator.userAgent.match(/(iPhone)/i)) {
-					if (isClick === 1) {
-						document.location = launcher.link_ios;
-					} else if (navigator.userAgent.match(/(iPad)/i)) {
-					if (isClick === 1) {
+				} else if (navigator.userAgent.match(/(iPhone|iPad)/i)) {
+					if (id === "registration") {
+						button.style.display = "block";
+					}
+					else (isClick === 1) {
 						document.location = launcher.link_ios;
 					}
 				} else if (navigator.userAgent.match(/Macintosh/i)) {
