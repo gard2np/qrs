@@ -286,30 +286,13 @@
 						document.location = launcher.link_android;
 					} else {
 						document.location = launcher.link_android_market;
-						// 인천 자가검침 바로가기 링크
-						if (id !== "indications") {
-							timeout = setTimeout(function () {
-								document.location = launcher.link_android;
-							}, 500);
-						}
 					}
 				} else if (navigator.userAgent.match(/(iPhone)/i)) {
 					if (isClick === 1) {
 						document.location = launcher.link_ios;
-					} else {
-						// 인천 자가검침 바로가기 링크
-						if (id === "indications") {
-							document.location = launcher.link_app;
-						}
-					}
-				} else if (navigator.userAgent.match(/(iPad)/i)) {
+					} else if (navigator.userAgent.match(/(iPad)/i)) {
 					if (isClick === 1) {
 						document.location = launcher.link_ios;
-					} else {
-						// 인천 자가검침 바로가기 링크
-						if (id === "indications") {
-							document.location = launcher.link_app;
-						}
 					}
 				} else if (navigator.userAgent.match(/Macintosh/i)) {
 					document.location = launcher.link_ios;
