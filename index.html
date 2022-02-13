@@ -262,7 +262,6 @@
 						(id === "upgrade" ? "" : "&launch=true&url=" + this.link_app);
 				}
 				return Launcher;
-				wcs.event("eventgroup01", "eventlaunch02");
 			})();
 
 			// 쿼리스트링 파싱
@@ -294,10 +293,16 @@
 							}, 500);
 						}
 					}
-				} else if (navigator.userAgent.match(/(iPhone|iPad)/i)) {
-					if (id === "registration") {
-						button.style.display = "block";
+				} else if (navigator.userAgent.match(/(iPhone)/i)) {
+					if (isClick === 1) {
+						document.location = launcher.link_ios;
+					} else {
+						// 인천 자가검침 바로가기 링크
+						if (id === "indications") {
+							document.location = launcher.link_app;
+						}
 					}
+				} else if (navigator.userAgent.match(/(iPad)/i)) {
 					if (isClick === 1) {
 						document.location = launcher.link_ios;
 					} else {
@@ -341,7 +346,6 @@
 					<button
 						class="round_btn bg_blue mt2rem mb1rem"
 						onclick="launchApp(1)"
-						onclick="wcs.event('eventgroup01', 'installclick01')"
 					>
 						가스앱 설치하기
 					</button>
